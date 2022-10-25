@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Courses } from './../entities/courses.entity';
 
+
 @Injectable()
 export class CRUDCoursesService {
     constructor(@InjectRepository(Courses) private coursesrepo: Repository<Courses>
@@ -30,7 +31,5 @@ export class CRUDCoursesService {
     async deleteCourse (id_course: number){
         await this.coursesrepo.delete(id_course);
         return ('Curso ' + id_course + ' Eliminado')
-    }
-    
-
+    } 
 }

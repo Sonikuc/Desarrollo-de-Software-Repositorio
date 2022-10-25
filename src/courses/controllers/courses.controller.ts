@@ -1,4 +1,5 @@
 import { Controller, Get, Put, Post, Delete, Param, Body } from '@nestjs/common';
+import { Query } from 'typeorm/driver/Query';
 import { CRUDCoursesService } from "./../services/courses.service";
 
 @Controller('courses')

@@ -6,13 +6,19 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule } from './config/config.module';
 import {  } from "module";
 import { typeOrmConfig } from './config/typeorm.config';
+import { LessonsModule } from './lessons/lessons.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(typeOrmConfig),
     
     CoursesModule,
     
-    ConfigModule],
+    ConfigModule,
+    
+    LessonsModule,
+    
+    CommentsModule],
   controllers: [AppController],
   providers: [AppService],
 })
