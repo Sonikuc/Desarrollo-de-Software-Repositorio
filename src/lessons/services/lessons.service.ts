@@ -26,12 +26,24 @@ export class LessonsService {
         return this.lessonsrepo.save(newLesson);
    }
 
-   async findAllLessons(id_course: number){
-    const qb = this.lessonsrepo.createQueryBuilder("lessons")
-    //REVISAR ESTA PARTE, EN EL QUERY EL PARAMETRO LLEGA COMO UN $1 o $2
-    qb.select("*").where("lessons.course_id = :id_course").setParameters({id_course})
+   async findAllLessons(paragraph: string){
+    let lessons: Lessons = new Lessons();
+    const qb = this.lessonsrepo.query('select * from lessons where $1 = ANY(paragraph)', [paragraph])
+    //REVISAR ESTA PARTE, EN EL QUERY EL PARAMETRO LLEGA COMO UN $1 o $
+    console.log(qb)
+  /*  qb.select('*').where('lessons.course_id = :id_course').setParameters({id_course})
+    console.log(id_course)
     console.log(qb.getSql())
-    return await qb.getRawMany();
-   }
+    let rawMany = await qb.getRawMany()
+    console.log(rawMany)
+    return rawMany;
+*/
+  /*  console.log(id_course);
+
+    return await (this.lessonsrepo.createQueryBuilder().where("lessons.course_id = :id_course", {id_course})).getRawMany();
+   */ 
+    
+    return qb;
+  }
 
 }

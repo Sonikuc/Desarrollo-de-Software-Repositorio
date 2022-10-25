@@ -14,7 +14,7 @@ export class LessonsController {
     }
 
     @Get('courses/:courseid')
-    getAllLessons(@Param('id') id:number){
+    getAllLessons(@Param('courseid') id:string){
         return this.lessonService.findAllLessons(id)
     }
 

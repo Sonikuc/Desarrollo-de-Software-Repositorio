@@ -10,7 +10,9 @@ export class CRUDCoursesService {
     ){}
 
     findAll(){
-      return  this.coursesrepo.find();
+      return  this.coursesrepo.find({
+        relations: ['lessons'],
+    });
     }
 
     findOne(id_course: number){
