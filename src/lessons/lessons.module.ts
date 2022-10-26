@@ -4,7 +4,7 @@ import { LessonsController } from './controllers/lessons.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Lessons } from './entities/lessons.entity';
 import { Courses } from 'src/courses/entities/courses.entity';
-
+ 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Lessons, Courses])
