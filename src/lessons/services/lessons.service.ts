@@ -26,24 +26,10 @@ export class LessonsService {
         return this.lessonsrepo.save(newLesson);
    }
 
-   async findAllLessons(paragraph: string){
-    let lessons: Lessons = new Lessons();
-    const qb = this.lessonsrepo.query('select * from lessons where $1 = ANY(paragraph)', [paragraph])
-    //REVISAR ESTA PARTE, EN EL QUERY EL PARAMETRO LLEGA COMO UN $1 o $
-    console.log(qb)
-  /*  qb.select('*').where('lessons.course_id = :id_course').setParameters({id_course})
-    console.log(id_course)
-    console.log(qb.getSql())
-    let rawMany = await qb.getRawMany()
-    console.log(rawMany)
-    return rawMany;
-*/
-  /*  console.log(id_course);
-
-    return await (this.lessonsrepo.createQueryBuilder().where("lessons.course_id = :id_course", {id_course})).getRawMany();
-   */ 
-    
-    return qb;
+   async findAllLessons(id_course:number){
+    let course = this.coursesrepo.findOne({where:{id: id_course}});
+    const qb = await this.lessonsrepo.createQueryBuilder("lessons").where("lessons.course_id = :id_course").setParameter('id_course', id_course).getMany();
+    return qb;    
   }
 
 }

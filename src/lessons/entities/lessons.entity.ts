@@ -16,7 +16,7 @@ export class Lessons{
     link: string;
 
     @ManyToOne(() => Courses, (course)=> course.lessons)
-    @JoinColumn({name: 'paragraph'})
+    @JoinColumn({name: 'course_id'})
     course: Courses;
 
 }

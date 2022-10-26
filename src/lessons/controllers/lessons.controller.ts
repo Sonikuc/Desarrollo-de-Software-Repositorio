@@ -9,12 +9,13 @@ export class LessonsController {
     }
 
     @Post('courses/:courseid')
-    addLesson(@Body() body: Lessons, @Param(':courseid') id:number){
+    addLesson(@Param('courseid') id: number, @Body() body: Lessons){
+        console.log(id)
         return this.lessonService.addLesson(body,id);
     }
 
     @Get('courses/:courseid')
-    getAllLessons(@Param('courseid') id:string){
+    getAllLessons(@Param('courseid') id: number){
         return this.lessonService.findAllLessons(id)
     }
 
