@@ -12,6 +12,7 @@ import { ProfessorModule } from './professor/professor.module';
 import { CategoryModule } from './category/category.module';
 import { KeywordsModule } from './keywords/keywords.module';
 import { StudentModule } from './student/student.module';
+import { SuscriptionModule } from './suscription/suscription.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(typeOrmConfig),
@@ -30,7 +31,9 @@ import { StudentModule } from './student/student.module';
 
     StudentModule,
     
-    CommentsModule],
+    CommentsModule,
+    
+    SuscriptionModule],
   controllers: [AppController],
   providers: [AppService],
 })

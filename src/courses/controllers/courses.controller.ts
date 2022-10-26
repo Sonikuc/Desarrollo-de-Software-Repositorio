@@ -19,7 +19,7 @@ export class CoursesController {
         return this.CRUDcourseService.findOne(id);
     }
 
-    @Post('/:professorid')
+    @Post('/createcourse/:professorid')
     createCourse(@Param('professorid') id:number, @Body() body: any){
         return this.CRUDcourseService.createCourse(id,body)
     }
@@ -34,6 +34,4 @@ export class CoursesController {
     deleteCourse(@Param('id') id: number){
         return this.CRUDcourseService.deleteCourse(id);
     }
-
-
 }

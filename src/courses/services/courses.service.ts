@@ -8,7 +8,7 @@ import { Courses } from './../entities/courses.entity';
 @Injectable()
 export class CRUDCoursesService {
     constructor(@InjectRepository(Courses) private coursesrepo: Repository<Courses>,
-    @InjectRepository(Courses) private profrepo: Repository<Professor>
+    @InjectRepository(Professor) private profrepo: Repository<Professor>
     ){}
 
     findAll(){
@@ -22,11 +22,11 @@ export class CRUDCoursesService {
     }
 
     async createCourse(id_professor: number, body: Courses){        
-        const newCourse: Courses = this.coursesrepo.create(body);           // HAY UN PROBLEMA AQUI, ARREGLAR
+        const newCourse: Courses = this.coursesrepo.create(body);
         const professor:Professor = await this.profrepo.findOne({where: {id_Professor: id_professor}})
         newCourse.professor = professor;
-        console.log(newCourse)
-     //   return (this.coursesrepo.save(newCourse))
+        newCourse.category = body.category;
+        return (this.coursesrepo.save(newCourse))
     }
 
     async updateCourse (id_course: number, body: Courses){
