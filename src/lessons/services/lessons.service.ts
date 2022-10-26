@@ -32,4 +32,9 @@ export class LessonsService {
     return qb;    
   }
 
+  async findOneLesson(id_course:number){
+
+  }
+
+
 }

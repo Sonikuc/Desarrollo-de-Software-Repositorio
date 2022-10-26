@@ -21,7 +21,7 @@ export class LessonsController {
 
     @Get(':lessonid/courses/:courseid')
     getOneLesson(@Param('lessonid') lessonid:number, @Param('courseid') courseid:number){
-
+        return this.lessonService.findOneLesson(lessonid);
     }
 
     @Put(':lessonid/courses/:courseid')
