@@ -3,7 +3,7 @@
 import { Courses } from "src/courses/entities/courses.entity";
 
 
-interface ICourseService{
+export interface ICourseService{
 
     execute(c:Courses):void;
 }

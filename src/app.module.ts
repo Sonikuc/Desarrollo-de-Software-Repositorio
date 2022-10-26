@@ -8,6 +8,10 @@ import {  } from "module";
 import { typeOrmConfig } from './config/typeorm.config';
 import { LessonsModule } from './lessons/lessons.module';
 import { CommentsModule } from './comments/comments.module';
+import { ProfessorModule } from './professor/professor.module';
+import { CategoryModule } from './category/category.module';
+import { KeywordsModule } from './keywords/keywords.module';
+import { StudentModule } from './student/student.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot(typeOrmConfig),
@@ -17,6 +21,14 @@ import { CommentsModule } from './comments/comments.module';
     ConfigModule,
     
     LessonsModule,
+
+    ProfessorModule,
+
+    CategoryModule,
+
+    KeywordsModule,
+
+    StudentModule,
     
     CommentsModule],
   controllers: [AppController],

@@ -19,9 +19,9 @@ export class CoursesController {
         return this.CRUDcourseService.findOne(id);
     }
 
-    @Post()
-    createCourse(@Body() body: any){
-        return this.CRUDcourseService.createCourse(body)
+    @Post('/:professorid')
+    createCourse(@Param('professorid') id:number, @Body() body: any){
+        return this.CRUDcourseService.createCourse(id,body)
     }
 
 

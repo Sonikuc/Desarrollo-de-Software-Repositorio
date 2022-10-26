@@ -5,7 +5,7 @@ import { IObserver } from "../Interfaces/InterfaceObserver";
 
 // eslint-disable-next-line prettier/prettier
 
-abstract class Observable{
+export abstract class IObservable{
 
     Observers: IObserver[] = new Array<IObserver>()
 

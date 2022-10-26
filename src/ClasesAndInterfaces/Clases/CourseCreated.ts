@@ -3,7 +3,7 @@
 import { ICourseState } from "../Interfaces/InterfaceCourseState";
 
 
-class CourseCreated implements ICourseState{
+export class CourseCreated implements ICourseState{
 
 
     showState(): string {

@@ -1,12 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Professor } from 'src/professor/entities/professor.entity';
 import { Repository } from 'typeorm';
 import { Courses } from './../entities/courses.entity';
 
 
 @Injectable()
 export class CRUDCoursesService {
-    constructor(@InjectRepository(Courses) private coursesrepo: Repository<Courses>
+    constructor(@InjectRepository(Courses) private coursesrepo: Repository<Courses>,
+    @InjectRepository(Courses) private profrepo: Repository<Professor>
     ){}
 
     findAll(){
@@ -19,9 +21,12 @@ export class CRUDCoursesService {
         return this.coursesrepo.findOne({where: {id: id_course}});
     }
 
-    createCourse(body: Courses){
-        const newCourse: Courses = this.coursesrepo.create(body);
-        return (this.coursesrepo.save(newCourse))
+    async createCourse(id_professor: number, body: Courses){        
+        const newCourse: Courses = this.coursesrepo.create(body);           // HAY UN PROBLEMA AQUI, ARREGLAR
+        const professor:Professor = await this.profrepo.findOne({where: {id_Professor: id_professor}})
+        newCourse.professor = professor;
+        console.log(newCourse)
+     //   return (this.coursesrepo.save(newCourse))
     }
 
     async updateCourse (id_course: number, body: Courses){

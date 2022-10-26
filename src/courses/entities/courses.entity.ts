@@ -1,8 +1,12 @@
 import { Category } from 'src/category/entities/category.entity';
+import { IObservable } from 'src/ClasesAndInterfaces/Clases/Observable';
+import { ICourseState } from 'src/ClasesAndInterfaces/Interfaces/InterfaceCourseState';
 import { Lessons } from 'src/lessons/entities/lessons.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn } from 'typeorm';
+import { Professor } from 'src/professor/entities/professor.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn, ManyToMany, ManyToOne } from 'typeorm';
 @Entity('courses')
-export class Courses{
+export class Courses extends IObservable{
+
 
     @PrimaryGeneratedColumn('increment')
     id: number;
@@ -13,11 +17,34 @@ export class Courses{
     @Column()
     description: string;
 
+    @Column()
+    state: string;
+
     @OneToMany(() => Lessons, (lessons)=>lessons.course)
-    lessons: Lessons[]
+    lessons: Lessons[];
 
     @OneToOne(() => Category)
     @JoinColumn({name: 'category_id'})
-    category: Category
+    category: Category;
+
+    @ManyToOne(() => Professor, (professor)=> professor.course)
+    @JoinColumn({name: 'profesor_id'})
+    professor: Professor;
+
+    courseState: ICourseState;
+
+    getCourseState():ICourseState{
+
+        return this.courseState;
+    }
+
+    transitionTo(courseState:ICourseState):void{
+
+        this.courseState = courseState;
+    }
+
+    notifyCourseState(s: ICourseState): void {
+        throw new Error('Method not implemented.');
+    }
 
 }

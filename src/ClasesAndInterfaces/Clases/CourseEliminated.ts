@@ -2,7 +2,7 @@
 
 import { ICourseState } from "../Interfaces/InterfaceCourseState";
 
-class CourseEliminated implements ICourseState{
+export class CourseEliminated implements ICourseState{
 
 
     showState(): string {
