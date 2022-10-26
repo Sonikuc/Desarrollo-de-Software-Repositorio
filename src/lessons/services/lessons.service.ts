@@ -27,13 +27,28 @@ export class LessonsService {
    }
 
    async findAllLessons(id_course:number){
-    let course = this.coursesrepo.findOne({where:{id: id_course}});
+    //let course = this.coursesrepo.findOne({where:{id: id_course}});
     const qb = await this.lessonsrepo.createQueryBuilder("lessons").where("lessons.course_id = :id_course").setParameter('id_course', id_course).getMany();
     return qb;    
   }
 
-  async findOneLesson(id_course:number){
+  async findOneLesson(id_lesson:number, id_course:number){
+ //   let course = this.coursesrepo.findOne({where:{id: id_course}});
+    const qb:Lessons = await this.lessonsrepo.createQueryBuilder("lessons").where("lessons.course_id = :id_course and lessons.id = :id_lesson").setParameters({id_course,id_lesson}).getOne();
+    return qb
+  }
 
+  async updateLesson(id_lesson:number, id_course:number, body:any){
+    const lesson:Lessons = await this.findOneLesson(id_lesson,id_course);
+    const qb = this.lessonsrepo.merge(lesson, body);
+    console.log(qb)
+    return (this.lessonsrepo.save(lesson));
+  }
+
+  async deleteLesson (id_lesson:number, id_course:number){
+    const lesson:Lessons = await this.findOneLesson(id_lesson,id_course);
+    await this.lessonsrepo.delete(lesson.id);
+    return ('Leccion: ' + lesson.tittle +  ' eliminada')
   }
 
 
