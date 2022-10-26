@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
 
+import { ICourseState } from "../Interfaces/InterfaceCourseState";
+
 class CourseEliminated implements ICourseState{
 
 

@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
-import { Person } from "person/person";
+
 import { Courses } from "src/courses/entities/courses.entity";
 
 
-interface IMediator{
+interface ICourseService{
 
-    notify(p:Person, c:Courses):void;
+    execute(c:Courses):void;
 }

@@ -1,8 +1,10 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable @typescript-eslint/no-empty-interface */
 
+import { ICourseState } from "./InterfaceCourseState";
 
-interface IObserver{
 
-    notified(s:State):void;
+export interface IObserver{
+
+    notified(s: ICourseState):void;
 }

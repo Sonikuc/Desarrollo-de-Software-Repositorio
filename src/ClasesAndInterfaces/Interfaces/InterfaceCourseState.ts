@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 
 
-interface ICourseState{
+export interface ICourseState{
 
     showState():string;
 }

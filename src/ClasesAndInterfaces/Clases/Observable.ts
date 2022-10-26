@@ -1,5 +1,8 @@
 /* eslint-disable prettier/prettier */
 
+import { ICourseState } from "../Interfaces/InterfaceCourseState";
+import { IObserver } from "../Interfaces/InterfaceObserver";
+
 // eslint-disable-next-line prettier/prettier
 
 abstract class Observable{
