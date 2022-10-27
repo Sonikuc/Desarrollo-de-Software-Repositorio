@@ -21,7 +21,7 @@ export class Student extends Person implements IObserver{
     @Column()
     state: string;
 
-    @OneToOne(() => Comments)
+    @OneToMany(() => Comments, (comment)=> comment.student)
     comment: Comments;
 
     @OneToMany(() => Suscription, (suscription) => suscription.course)

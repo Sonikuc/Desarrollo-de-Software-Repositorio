@@ -9,7 +9,7 @@ export class Comments{
     @Column()
     text:string
  
-    @OneToOne(() => Student)
+    @ManyToOne(() => Student, (student)=> student.comment)
     @JoinColumn({name: 'student_id'})
     student: Student;
 

@@ -10,18 +10,21 @@ export class CommentsController {
     }
 
     @Get(':id')
-    getOneCourse(@Param('id') id: number){
+    getOneComment(@Param('id') id: number){
         return this.commentService.findOne(id);
     }
 
-    @Post(':id_Student/:id')
-    addComment(@Body() body: Comments, @Param(':id_Student') id_Student:number, @Param(':id') id:number){
-        return this.commentService.addComment(body,id_Student, id);
+    @Post('/create/student/:id_s/lesson/:id_c')
+    addComment( @Param('id_s') id_s: number, @Param('id_c') id_c: number, @Body() body:any){
+        console.log('estudiante: '+ id_s)
+        console.log('leccion ' + id_c)
+        return this.commentService.addComment(body,id_s, id_c);
     }
 
-    @Delete(':id_Student/:id')
-    delete(@Param(':id_Student') id_Student:number, @Param('id') id:number){
-
-        return this.commentService.delete(id_Student, id);
+    @Delete('/delete/student/:id_s/lesson/:id_c')
+    delete(@Param('id_s') id_s:number, @Param('id_c') id_c:number){
+        console.log('estudiante: '+ id_s)
+        console.log('leccion ' + id_c)
+        return this.commentService.delete(id_s, id_c);
     }
 }

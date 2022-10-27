@@ -17,27 +17,31 @@ export class CommentsService {
         return this.commentrepo.findOne({where: {id: id_comment}});
     }
 
-   async addComment(data: Comments, id_Student:number, id:number){
+   async addComment(data: any, id_Student:number, id:number){
+    console.log(id_Student + ' '+ id)
         const lesson = await this.lessonsrepo.findOne({where: {id: id}});
-        const student2 = await this.studentrepo.findOne({where: {id_Student: id}});
+        const student2 = await this.studentrepo.findOne({where: {id_Student: id_Student}});
+        console.log(lesson)
+        console.log(student2)
         if ((!lesson) || (!student2)) {
             throw new Notification ('Leccion no encontrada')
         }
         if (student2.state='Active'){
             const newComment = new Comments();
-            newComment.id = data.id;
+            //newComment.id = data.id;
             newComment.text = data.text;
             newComment.student = student2;
+            newComment.lesson = lesson;
             return this.commentrepo.save(newComment);
         }
         else return;
    }
 
-   async delete(id_Student:number, id:number){
-    const student2 = await this.studentrepo.findOne({where: {id_Student: id}});
-    if (student2.comment.id=id) {
-        await this.commentrepo.delete(id);
+    async delete(id_s:number, id_c:number){ 
+        console.log('estudiante: '+ id_s)
+        console.log('leccion ' + id_c)
+        const qb = await this.commentrepo.createQueryBuilder("comments").where("comments.lesson_id = :id_c and comments.student_id =:id_s").setParameters({id_c,id_s}).getOne();
+        await this.commentrepo.delete(qb.id);
+        return ('Comentario Eliminado')
     }
-    return true;
-}
 }
