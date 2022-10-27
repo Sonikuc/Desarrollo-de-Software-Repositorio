@@ -3,6 +3,7 @@ import { IObservable } from 'src/ClasesAndInterfaces/Clases/Observable';
 import { ICourseState } from 'src/ClasesAndInterfaces/Interfaces/InterfaceCourseState';
 import { Lessons } from 'src/lessons/entities/lessons.entity';
 import { Professor } from 'src/professor/entities/professor.entity';
+import { Suscription } from 'src/suscription/entities/suscription.entity';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn, ManyToMany, ManyToOne } from 'typeorm';
 @Entity('courses')
 export class Courses extends IObservable{
@@ -30,6 +31,9 @@ export class Courses extends IObservable{
     @ManyToOne(() => Professor, (professor)=> professor.course)
     @JoinColumn({name: 'profesor_id'})
     professor: Professor;
+
+    @OneToMany(() => Suscription, (suscription) => suscription.course)
+    suscription: Suscription
 
     courseState: ICourseState;
 
