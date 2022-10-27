@@ -33,7 +33,7 @@ export class Professor{
         let course: Courses = new Courses();
         course = await crud.findOneCourse(id)
         //const course: Courses = await this.coursesrepo.findOneCourse({where: {id: id}});
-        //   console.log(course)
+           console.log(course)
         if (state_course == 'suspend'){
             this.courseService = new NotifySuspendedCourse(new SuspendCourse());
             this.courseService.execute(course);
@@ -41,7 +41,7 @@ export class Professor{
             crud.updateCourse(id, course)
         }
 
-        if (state_course == 'delete'){
+        if (state_course == "delete"){
             this.courseService = new NotifyEliminatedCourse(new DeleteCourse());
             this.courseService.execute(course);
             //agregar logica de guardar en BD

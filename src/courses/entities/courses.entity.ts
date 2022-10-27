@@ -43,12 +43,20 @@ export class Courses extends IObservable{
     }
 
     transitionTo(courseState:ICourseState){
-
         this.courseState = courseState;
         this.state = "suspended"
         return this
-        //agregar logica para guardar el estado en BD
+
     }
+
+    transitionTodelete(courseState:ICourseState){
+        this.courseState = courseState;
+        this.state = "eliminated"
+        return this
+
+    }
+
+    
 
     notifyCourseState(c: Courses): void {
         for (let i of c.Observers)

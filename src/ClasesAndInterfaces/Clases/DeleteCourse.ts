@@ -8,6 +8,6 @@ export class DeleteCourse implements ICourseService{
 
     execute(c: Courses): void {
         
-        c.transitionTo(new CourseEliminated());
+        c.transitionTodelete(new CourseEliminated());
     }
 }
