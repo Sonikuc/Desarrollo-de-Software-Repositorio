@@ -14,6 +14,7 @@ import { KeywordsModule } from './keywords/keywords.module';
 import { StudentModule } from './student/student.module';
 import { SuscriptionModule } from './suscription/suscription.module';
 
+
 @Module({
   imports: [TypeOrmModule.forRoot(typeOrmConfig),
     

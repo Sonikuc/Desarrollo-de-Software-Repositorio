@@ -22,7 +22,7 @@ export class CommentsService {
         const newComment = new Comments();
         newComment.id = data.id;
         newComment.text = data.text;
-        //newComment.student = "student2.name";
+        newComment.student = student2;
         return this.commentrepo.save(newComment);
    }
 

@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { Person } from 'person/person';
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
+import { Comments } from 'src/comments/entities/comments.entity';
+import { Suscription } from 'src/suscription/entities/suscription.entity';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne } from 'typeorm';
 import { StudentState } from './studentstate';
 
 @Entity('student')
@@ -16,9 +18,11 @@ export class Student extends Person{
     @Column()
     state: string;
 
-    @OneToOne(() => Comment, (comment) => comment)
-    comment: Comment;
-    
+    //@OneToOne(() => Comments)
+    //comment: Comments;
+
+    @OneToMany(() => Suscription, (suscription) => suscription.course)
+    suscription: Suscription
 
     studentState: StudentState
 }
