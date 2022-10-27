@@ -29,7 +29,6 @@ export class StudentService {
     }
 
     async update(id: number, body: any){
-
         const Professor = await this.StudentRepo.findOne({where: { id_Student : id }});
         this.StudentRepo.merge(Professor, body);
         return this.StudentRepo.save(Professor);

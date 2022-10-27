@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Courses } from 'src/courses/entities/courses.entity';
 import { ProfessorService } from '../services/professor.service';
 
 
@@ -40,4 +41,10 @@ export class ProfessorController {
 
         return this.professorService.delete(id);
     }
+
+ /*   @Put('/course/:id/suspend')
+    supendCourse(@Param('id') id: number, @Body() body: any){
+        this.professorService.suspendCourse(id,body.state)
+    }
+    */
 }

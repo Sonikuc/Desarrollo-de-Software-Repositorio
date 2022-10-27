@@ -19,13 +19,7 @@ export class SuscriptionService {
         const newCourse: Courses = await this.coursesrepo.findOne({where: {id: id_course}});
         newSuscription.student = newStudent;
         newSuscription.course = newCourse;
-    //    newCourse.Observers.push(newStudent);     FALTA HACER LO DEL OBSERVER
 
-
-
-        // console.log(newCourse);
-        // console.log(newStudent)
-        // console.log(newSuscription)
         return (this.suscriptionrepo.save(newSuscription))
     }
 

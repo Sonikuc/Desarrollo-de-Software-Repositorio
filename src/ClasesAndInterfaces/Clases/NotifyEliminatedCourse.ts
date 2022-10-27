@@ -9,9 +9,9 @@ class NotifyEliminatedCourse extends CourseServiceDecorator {
 
     execute(c: Courses): void {
         
-        this.getCourse().execute(c);
+        this.decorated.execute(c);
 
-        c.notifyCourseState(c.getCourseState());
+        c.notifyCourseState(c);
     }
 
 }

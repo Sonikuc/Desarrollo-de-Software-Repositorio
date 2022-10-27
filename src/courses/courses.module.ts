@@ -5,13 +5,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { Courses } from './entities/courses.entity';
 import { Professor } from 'src/professor/entities/professor.entity';
+import { Suscription } from 'src/suscription/entities/suscription.entity';
 
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Courses, Professor])
+    TypeOrmModule.forFeature([Courses, Professor, Suscription])
   ],
-  providers: [CRUDCoursesService],
+  providers: [CRUDCoursesService, Professor],
   controllers: [CoursesController]
 })
 export class CoursesModule {}

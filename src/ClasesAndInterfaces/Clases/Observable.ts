@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 
+import { Courses } from "src/courses/entities/courses.entity";
 import { ICourseState } from "../Interfaces/InterfaceCourseState";
 import { IObserver } from "../Interfaces/InterfaceObserver";
 
@@ -22,5 +23,5 @@ export abstract class IObservable{
         this.Observers.splice(pos,1);
     }
 
-    abstract notifyCourseState(s:ICourseState):void
+    abstract notifyCourseState(c: Courses):void
 }
