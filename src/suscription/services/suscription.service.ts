@@ -22,4 +22,9 @@ export class SuscriptionService {
 
         return (this.suscriptionrepo.save(newSuscription))
     }
+
+    async deleteSuscription(id_course:number, id_student:number){
+        const qb = await this.suscriptionrepo.createQueryBuilder("suscription").where("suscription.course_id = :id_course and suscription.student_id =:id_student").setParameters({id_course,id_student}).getOne();
+        console.log(qb)
+    }
 }
