@@ -21,8 +21,8 @@ export class Student extends Person implements IObserver{
     @Column()
     state: string;
 
-    //@OneToOne(() => Comments)
-    //comment: Comments;
+    @OneToOne(() => Comments)
+    comment: Comments;
 
     @OneToMany(() => Suscription, (suscription) => suscription.course)
     suscription: Suscription
@@ -31,5 +31,10 @@ export class Student extends Person implements IObserver{
 
     notified(s: ICourseState): void {
         console.log('Nuevo correo: El curso al que esta suscrito esta ahora: ' + s.showState())
+    }
+
+    transitionTo(StundentState:StudentState):void{
+
+        this.studentState = StundentState;
     }
 }
