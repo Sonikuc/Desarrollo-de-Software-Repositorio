@@ -23,8 +23,15 @@ export class SuscriptionService {
         return (this.suscriptionrepo.save(newSuscription))
     }
 
-    async deleteSuscription(id_course:number, id_student:number){
-        const qb = await this.suscriptionrepo.createQueryBuilder("suscription").where("suscription.course_id = :id_course and suscription.student_id =:id_student").setParameters({id_course,id_student}).getOne();
-        console.log(qb)
+    async deleteSuscription(id_student:number, id_course: number){
+        
+        const qb = await this.suscriptionrepo.createQueryBuilder("suscripcion").where("suscripcion.course_id = :id_course and suscripcion.student_id =:id_student").setParameters({id_course,id_student}).getOne();
+        await this.suscriptionrepo.delete(qb.id);
+        return ('La Suscripcion. Con estudiante: ' + id_student + ' Y Curso ' + id_course + ' ha sido Eliminada')
+
     }
+
+
+
+
 }
