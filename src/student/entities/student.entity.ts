@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Person } from 'person/person';
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
 import { StudentState } from './studentstate';
 
 @Entity('student')
@@ -15,6 +15,10 @@ export class Student extends Person{
 
     @Column()
     state: string;
+
+    @OneToOne(() => Comment, (comment) => comment)
+    comment: Comment;
+    
 
     studentState: StudentState
 }
