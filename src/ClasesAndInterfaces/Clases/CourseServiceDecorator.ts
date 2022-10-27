@@ -4,7 +4,7 @@ import { ICourseService } from "../Interfaces/InterfaceCourseService";
 
 export class CourseServiceDecorator implements ICourseService{
 
-    private decorated: ICourseService;
+    decorated: ICourseService;
 
     constructor(decorated:ICourseService){
 
@@ -21,7 +21,7 @@ export class CourseServiceDecorator implements ICourseService{
         return this.decorated;
     }
 
-    execute(c: Courses): void {
+    execute(c: Courses) {
 
         this.getCourse().execute(c);
     }

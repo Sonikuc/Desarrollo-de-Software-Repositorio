@@ -42,13 +42,18 @@ export class Courses extends IObservable{
         return this.courseState;
     }
 
-    transitionTo(courseState:ICourseState):void{
+    transitionTo(courseState:ICourseState){
 
         this.courseState = courseState;
+        this.state = "suspended"
+        return this
+        //agregar logica para guardar el estado en BD
     }
 
-    notifyCourseState(s: ICourseState): void {
-        throw new Error('Method not implemented.');
+    notifyCourseState(c: Courses): void {
+        for (let i of c.Observers)
+		i.notified(this.courseState);
+
     }
 
 }

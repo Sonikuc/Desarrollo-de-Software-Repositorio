@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { NotifySuspendedCourse } from 'src/ClasesAndInterfaces/Clases/NotifySuspendedCourse';
+import { SuspendCourse } from 'src/ClasesAndInterfaces/Clases/SuspendCourse';
 import { Professor } from 'src/professor/entities/professor.entity';
 import { Suscription } from 'src/suscription/entities/suscription.entity';
 import { Repository } from 'typeorm';
@@ -10,7 +12,8 @@ import { Courses } from './../entities/courses.entity';
 export class CRUDCoursesService {
     constructor(@InjectRepository(Courses) private coursesrepo: Repository<Courses>,
     @InjectRepository(Professor) private profrepo: Repository<Professor>,
-    @InjectRepository(Suscription) private suscriptionrepo: Repository<Suscription>
+    @InjectRepository(Suscription) private suscriptionrepo: Repository<Suscription>,
+    private professor: Professor
     ){}
 
     async findAll(){
@@ -21,7 +24,7 @@ export class CRUDCoursesService {
       return  qb
     }
 
-    async findOne(id_course: number){
+    async findOneCourse(id_course: number){
 
         const course: Courses = await this.coursesrepo.findOne({where: {id: id_course}});
 
@@ -30,14 +33,8 @@ export class CRUDCoursesService {
         })
 
         for (let i of qb2){
-          //  course.Observers.push(i.student)
-
-        }
-
-        
-
-        console.log(qb2)
-
+            course.addObserver(i.student);
+        }   
         return course
     }
 
@@ -59,4 +56,10 @@ export class CRUDCoursesService {
         await this.coursesrepo.delete(id_course);
         return ('Curso ' + id_course + ' Eliminado')
     } 
+
+    changeCourseState(id:number, state_course: string, crud: CRUDCoursesService){
+        console.log('estoy en course service para llamar al profe')
+        this.professor.changeCourseService(id,state_course,crud)
+    }
+
 }

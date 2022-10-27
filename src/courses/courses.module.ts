@@ -12,7 +12,7 @@ import { Suscription } from 'src/suscription/entities/suscription.entity';
   imports: [
     TypeOrmModule.forFeature([Courses, Professor, Suscription])
   ],
-  providers: [CRUDCoursesService],
+  providers: [CRUDCoursesService, Professor],
   controllers: [CoursesController]
 })
 export class CoursesModule {}

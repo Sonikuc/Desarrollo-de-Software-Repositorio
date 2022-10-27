@@ -8,8 +8,8 @@ import { Professor } from '../entities/professor.entity';
 export class ProfessorService {
 
 
-    constructor( @InjectRepository(Professor) private ProfessorRepo: Repository<Professor>
-    
+    constructor( @InjectRepository(Professor) private ProfessorRepo: Repository<Professor>,
+        private professor: Professor
     ){ }
 
 
@@ -41,4 +41,9 @@ export class ProfessorService {
         await this.ProfessorRepo.delete(id);
         return true;
     }
+
+ /*   suspendCourse(id: number, state:string){
+        this.professor.changeCourseState(id,state);
+    }
+    */
 }

@@ -2,14 +2,13 @@
 import { Courses } from "src/courses/entities/courses.entity";
 import { CourseServiceDecorator } from "./CourseServiceDecorator";
 
-class NotifySuspendedCourse extends CourseServiceDecorator{
-
+export class NotifySuspendedCourse extends CourseServiceDecorator{
 
 
     execute(c: Courses): void {
-        
-        this.getCourse().execute(c);
-
-        c.notifyCourseState(c.getCourseState());
+        console.log('estoy en notifysuspended')
+        this.decorated.execute(c);
+        console.log(c)
+        c.notifyCourseState(c);
     }
 }
