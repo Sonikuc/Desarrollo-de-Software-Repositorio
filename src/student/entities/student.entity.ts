@@ -18,11 +18,18 @@ export class Student extends Person{
     @Column()
     state: string;
 
-    //@OneToOne(() => Comments)
-    //comment: Comments;
+    @OneToOne(() => Comments)
+    comment: Comments;
 
     @OneToMany(() => Suscription, (suscription) => suscription.course)
     suscription: Suscription
 
-    studentState: StudentState
+    
+    studentState: StudentState;
+
+    transitionTo(StundentState:StudentState):void{
+
+        this.studentState = StundentState;
+    }
+
 }

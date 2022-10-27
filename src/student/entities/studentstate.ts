@@ -2,21 +2,26 @@ import { Lessons } from "src/lessons/entities/lessons.entity";
 import { Student } from "./student.entity";
 
 export interface StudentState {
-    doComment(lessons:Lessons, student: Student, text:string)
+    showState()
 }
 
 export class ActiveStudent implements StudentState{
     
     
-    doComment(lessons:Lessons, student: Student, text:string) {
-       //logica hacerr comentario 
-    }
+    //doComment(lessons:Lessons, student: Student, text:string) {
+        showState(): string {
+        
+            return 'Active';
+        }
+    //}
 }
 
 export class BlockedStudent implements StudentState{
     
-    
-    doComment(lessons:Lessons, student: Student, text:string) {
-       //logica hacerr comentario 
-    }
+    //doComment(lessons:Lessons, student: Student, text:string) {
+        showState(): string {
+        
+            return 'Blocked';
+        }
+    //}
 }
