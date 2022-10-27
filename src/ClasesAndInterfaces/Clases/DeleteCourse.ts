@@ -4,7 +4,7 @@ import { ICourseService } from '../Interfaces/InterfaceCourseService'
 import { CourseEliminated } from './CourseEliminated';
 
 
-class DeleteCourse implements ICourseService{
+export class DeleteCourse implements ICourseService{
 
     execute(c: Courses): void {
         

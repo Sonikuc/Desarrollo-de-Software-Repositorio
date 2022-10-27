@@ -4,7 +4,7 @@ import { Courses } from "src/courses/entities/courses.entity";
 import { CourseServiceDecorator } from "./CourseServiceDecorator";
 
 
-class NotifyEliminatedCourse extends CourseServiceDecorator {
+export class NotifyEliminatedCourse extends CourseServiceDecorator {
 
 
     execute(c: Courses): void {

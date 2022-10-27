@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { CourseSuspended } from 'src/ClasesAndInterfaces/Clases/CourseSuspended';
+import { DeleteCourse } from 'src/ClasesAndInterfaces/Clases/DeleteCourse';
+import { NotifyEliminatedCourse } from 'src/ClasesAndInterfaces/Clases/NotifyEliminatedCourse';
 import { NotifySuspendedCourse } from 'src/ClasesAndInterfaces/Clases/NotifySuspendedCourse';
 import { SuspendCourse } from 'src/ClasesAndInterfaces/Clases/SuspendCourse';
 import { ICourseService } from 'src/ClasesAndInterfaces/Interfaces/InterfaceCourseService';
@@ -28,7 +30,6 @@ export class Professor{
     }
 
     async changeCourseService(id:number, state_course: string, crud: CRUDCoursesService){
-        console.log('estoy en el metodo changeCourse')
         let course: Courses = new Courses();
         course = await crud.findOneCourse(id)
         //const course: Courses = await this.coursesrepo.findOneCourse({where: {id: id}});
@@ -40,8 +41,11 @@ export class Professor{
             crud.updateCourse(id, course)
         }
 
-        if (state_course == 'eliminate'){
-
+        if (state_course == 'delete'){
+            this.courseService = new NotifyEliminatedCourse(new DeleteCourse());
+            this.courseService.execute(course);
+            //agregar logica de guardar en BD
+            crud.updateCourse(id, course)
         }
 
     }

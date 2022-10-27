@@ -39,4 +39,17 @@ export class CoursesController {
     supendCourse(@Param('id') id: number, @Body() body: any){
         this.CRUDcourseService.changeCourseState(id, body.state, this.CRUDcourseService)
     }
+
+    @Put(':id/delete')
+    deletenotifyCourse(@Param('id') id: number, @Body() body: any){
+        this.CRUDcourseService.changeCourseState(id, body.state, this.CRUDcourseService)
+    }
+
+    @Put(':id/publish')
+    publishCourse(@Param('id') id: number, @Body() body: any){
+        return this.CRUDcourseService.coursePublished(id);
+
+    }
+
+
 }
