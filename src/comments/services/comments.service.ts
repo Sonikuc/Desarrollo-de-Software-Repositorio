@@ -11,15 +11,21 @@ export class CommentsService {
     @InjectRepository(Lessons) private lessonsrepo: Repository<Lessons>
     ){}
 
-   async addComment(data: Comments, id:number){
+   async addComment(data: Comments, id_Student:string, id:number){
         const lesson = await this.lessonsrepo.findOne({where: {id: id}});
-        if (!lesson){
+        if (!lesson) {
             throw new Notification ('Leccion no encontrada')
         }
         const newComment = new Comments();
         newComment.id = data.id;
         newComment.text = data.text;
-        newComment.student = data.student;
+        newComment.student = id_Student;
         return this.commentrepo.save(newComment);
    }
+
+   async delete(id:number){
+
+    await this.commentrepo.delete(id);
+    return true;
+}
 }
