@@ -4,37 +4,47 @@ import { Lessons } from 'src/lessons/entities/lessons.entity';
 import { Repository } from 'typeorm';
 import { Comments } from '../entities/comments.entity';
 import { Student } from "src/student/entities/student.entity";
+import { Courses } from 'src/courses/entities/courses.entity';
 
 @Injectable()
 export class CommentsService {
      
     constructor(@InjectRepository(Comments) private commentrepo: Repository<Comments>,
     @InjectRepository(Lessons) private lessonsrepo: Repository<Lessons>,
-    @InjectRepository(Student) private studentrepo: Repository<Student>
+    @InjectRepository(Student) private studentrepo: Repository<Student>,
+    @InjectRepository(Courses) private courserepo: Repository<Courses>
     ){}
 
     findOne(id_comment: number){
         return this.commentrepo.findOne({where: {id: id_comment}});
     }
 
-   async addComment(data: any, id_Student:number, id:number){
-    console.log(id_Student + ' '+ id)
+   async addComment(data: any, id_Student:number, id:number, id_c: number){
         const lesson = await this.lessonsrepo.findOne({where: {id: id}});
         const student2 = await this.studentrepo.findOne({where: {id_Student: id_Student}});
-        console.log(lesson)
-        console.log(student2)
+        const course = await this.courserepo.findOne({where:{id: id_c}})
+        console.log('leccion' +lesson)
+        console.log('estudiante' +student2)
+        console.log('curso:' +course)
         if ((!lesson) || (!student2)){
-            return ('Leccion no encontrada')
+            return ('Leccion o estudiante no encontrado')
         }
-        if (student2.state=='Active'){
-            const newComment = new Comments();
-            //newComment.id = data.id;
-            newComment.text = data.text;
-            newComment.student = student2;
-            newComment.lesson = lesson;
-            return this.commentrepo.save(newComment);
+
+        if (course.state == 'published'){
+            if (student2.state=='Active'){
+                const newComment = new Comments();
+                //newComment.id = data.id;
+                newComment.text = data.text;
+                newComment.student = student2;
+                newComment.lesson = lesson;
+                return this.commentrepo.save(newComment);
+            }
+            else return("No puede comentar, estas bloqueado");
         }
-        else return("No puede comentar, estas bloqueado");
+        else return ('No puede comentar en un curso que no esta publicado')
+
+
+        
    }
 
     async delete(id_s:number, id_c:number){ 

@@ -14,11 +14,9 @@ export class CommentsController {
         return this.commentService.findOne(id);
     }
 
-    @Post('/create/student/:id_s/lesson/:id_c')
-    addComment( @Param('id_s') id_s: number, @Param('id_c') id_c: number, @Body() body:any){
-        console.log('estudiante: '+ id_s)
-        console.log('leccion ' + id_c)
-        return this.commentService.addComment(body,id_s, id_c);
+    @Post('/create/student/:id_s/course/:id_c/lesson/:id_l')
+    addComment( @Param('id_s') id_s: number, @Param('id_l') id_l: number, @Param('id_c') id_c: number, @Body() body:any){
+        return this.commentService.addComment(body,id_s, id_l, id_c);
     }
 
     @Delete('/delete/student/:id_s/lesson/:id_c')
