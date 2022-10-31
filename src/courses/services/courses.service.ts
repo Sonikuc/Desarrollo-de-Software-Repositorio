@@ -55,6 +55,7 @@ export class CRUDCoursesService {
         const professor:Professor = await this.profrepo.findOne({where: {id_Professor: id_professor}})
         newCourse.professor = professor;
         newCourse.category = body.category;
+        
         return (this.coursesrepo.save(newCourse))
     }
 
@@ -77,7 +78,7 @@ export class CRUDCoursesService {
     async coursePublished(id_c: number){
         const course: Courses = await this.coursesrepo.findOne({where: {id: id_c}});
         let qb3 = await this.lessonrepo.createQueryBuilder("lessons").where("lessons.course_id = :id_course").setParameter('id_course', id_c).getMany();
-        if (qb3[1] == undefined){
+        if (qb3[0] == undefined){
             return ('Debe tener al menos una leccion para publicar')
         }
         else{

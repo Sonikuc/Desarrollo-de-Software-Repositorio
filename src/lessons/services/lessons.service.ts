@@ -15,7 +15,7 @@ export class LessonsService {
    async addLesson(data: Lessons, course_id:number){
         const course = await this.coursesrepo.findOne({where: {id: course_id}});
         if (!course){
-            throw new Notification ('Curso no encontrado')
+           return ('Curso no encontrado')
         }
         const newLesson = new Lessons();
         newLesson.id = data.id;

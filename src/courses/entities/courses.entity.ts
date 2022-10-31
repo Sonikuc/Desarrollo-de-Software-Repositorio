@@ -9,7 +9,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn
 export class Courses extends IObservable{
 
 
-    @PrimaryGeneratedColumn('increment')
+    @PrimaryGeneratedColumn()
     id: number;
 
     @Column()
@@ -59,8 +59,11 @@ export class Courses extends IObservable{
     
 
     notifyCourseState(c: Courses): void {
-        for (let i of c.Observers)
-		i.notified(this.courseState);
+        for (let i of c.Observers){ 
+
+            i.notified(this.courseState);
+
+        }
 
     }
 

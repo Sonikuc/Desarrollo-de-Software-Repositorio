@@ -17,10 +17,18 @@ export class SuscriptionService {
         const newSuscription: Suscription = this.suscriptionrepo.create();
         const newStudent: Student = await this.studentrepo.findOne({where: {id_Student: id_student}});
         const newCourse: Courses = await this.coursesrepo.findOne({where: {id: id_course}});
-        newSuscription.student = newStudent;
+        if (newStudent.state == "Blocked"){
+            return "No se puede suscribir, esta bloqueado"
+        }
+
+        if(newCourse.state == "published"){
+            newSuscription.student = newStudent;
         newSuscription.course = newCourse;
 
         return (this.suscriptionrepo.save(newSuscription))
+        }
+        return ("Este curso no esta publicado")
+        
     }
 
     async deleteSuscription(id_student:number, id_course: number){
