@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Courses } from 'src/courses/entities/courses.entity';
-import { Entity, Column, PrimaryGeneratedColumn, OneToOne } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToOne, OneToMany } from 'typeorm';
 
 @Entity()
 export class Category{
@@ -11,7 +11,7 @@ export class Category{
     @Column()
     name: string;
 
-    @OneToOne(() => Courses, (course) => course.category)
+    @OneToMany(() => Courses, (course) => course.category)
     course: Courses
 
 }

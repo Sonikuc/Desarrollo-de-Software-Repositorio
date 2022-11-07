@@ -13,7 +13,7 @@ export class Suscription{
     @JoinColumn({name: 'student_id'})
     student: Student;
 
-    @ManyToOne(() => Courses, (course)=> course.suscription)
+    @ManyToOne(() => Courses, (course)=> course.suscription, { onDelete: 'CASCADE' })
     @JoinColumn({name: 'course_id'})
     course: Courses;
 }

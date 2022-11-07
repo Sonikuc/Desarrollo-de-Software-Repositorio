@@ -9,7 +9,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinColumn
 export class Courses extends IObservable{
 
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('rowid')
     id: number;
 
     @Column()
@@ -24,7 +24,7 @@ export class Courses extends IObservable{
     @OneToMany(() => Lessons, (lessons)=>lessons.course)
     lessons: Lessons[];
 
-    @OneToOne(() => Category)
+    @ManyToOne(() => Category)
     @JoinColumn({name: 'category_id'})
     category: Category;
 
